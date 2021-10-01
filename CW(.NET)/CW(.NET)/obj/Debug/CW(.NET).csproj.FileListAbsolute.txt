@@ -17,3 +17,4 @@ D:\STEP hw\Visual\CW(.NET)\CW(.NET)\bin\Debug\Newtonsoft.Json.dll
 D:\STEP hw\Visual\CW(.NET)\CW(.NET)\bin\Debug\Newtonsoft.Json.xml
 D:\STEP hw\Visual\CW(.NET)\CW(.NET)\obj\Debug\CW_.NET_.Description.resources
 D:\STEP hw\Visual\CW(.NET)\CW(.NET)\obj\Debug\CW_.NET_.ProfileForm.resources
+D:\STEP hw\Visual\CW(.NET)\CW(.NET)\bin\Debug\MaterialSkin.dll

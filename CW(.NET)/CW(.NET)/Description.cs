@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CW_.NET_
 {
-    public partial class Description : Form
+    public partial class Description : MaterialForm
     {
         private MarvelContext context = new MarvelContext();
         private MarvelManager manager = new MarvelManager();
@@ -29,8 +30,8 @@ namespace CW_.NET_
                 comboBox1.Items.RemoveAt(0);
                 if (context.Characters.Where(x => x.RealId == item.RealId).Any())
                 {
-                    button2.Enabled = false;
-                    button3.Enabled = true;
+                    materialFlatButton1.Enabled = false;
+                    materialFlatButton2.Enabled = true;
                 }
             }
             else if (item.GetType() == typeof(Comic))
@@ -39,8 +40,8 @@ namespace CW_.NET_
                 comboBox1.Items.RemoveAt(1);
                 if (context.Comics.Where(x => x.RealId == item.RealId).Any())
                 {
-                    button2.Enabled = false;
-                    button3.Enabled = true;
+                    materialFlatButton1.Enabled = false;
+                    materialFlatButton2.Enabled = true;
                 }
             }
             else
@@ -48,24 +49,13 @@ namespace CW_.NET_
                 comboBox1.Items.RemoveAt(2);
                 if (context.Movies.Where(x => x.RealId == item.RealId).Any())
                 {
-                    button2.Enabled = false;
-                    button3.Enabled = true;
+                    materialFlatButton1.Enabled = false;
+                    materialFlatButton2.Enabled = true;
                 }
             }
             comboBox1.SelectedIndex = 0;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            flowLayoutPanel1.Controls.Clear();
-            string name = item.GetType().Name.ToLower()+'s';
-            if (name.Contains("movie"))
-            {
-                name = "series";
-            }
-            var items = manager.GetItemsById(item.RealId, name, comboBox1.SelectedItem.ToString());
-            Task.Run(() => AddToForm(items));
-        }
 
         private void AddToForm(IEnumerable<ItemPrototype> items)
         {
@@ -121,7 +111,19 @@ namespace CW_.NET_
             form.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            string name = item.GetType().Name.ToLower() + 's';
+            if (name.Contains("movie"))
+            {
+                name = "series";
+            }
+            var items = manager.GetItemsById(item.RealId, name, comboBox1.SelectedItem.ToString());
+            Task.Run(() => AddToForm(items));
+        }
+
+        private void materialFlatButton1_Click(object sender, EventArgs e)
         {
             if (item.GetType() == typeof(Character))
             {
@@ -136,15 +138,15 @@ namespace CW_.NET_
                 context.Movies.Add((Movie)item);
             }
             context.SaveChanges();
-            button2.Enabled = false;
-            button3.Enabled = true;
+            materialFlatButton1.Enabled = false;
+            materialFlatButton2.Enabled = true;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void materialFlatButton2_Click(object sender, EventArgs e)
         {
             if (item.GetType() == typeof(Character))
             {
-                context.Characters.Remove(context.Characters.Where(x => x.RealId==item.RealId).FirstOrDefault());
+                context.Characters.Remove(context.Characters.Where(x => x.RealId == item.RealId).FirstOrDefault());
             }
             else if (item.GetType() == typeof(Comic))
             {
@@ -155,11 +157,11 @@ namespace CW_.NET_
                 context.Movies.Remove(context.Movies.Where(x => x.RealId == item.RealId).FirstOrDefault());
             }
             context.SaveChanges();
-            button2.Enabled = true;
-            button3.Enabled = false;
+            materialFlatButton1.Enabled = true;
+            materialFlatButton2.Enabled = false;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void materialRaisedButton2_Click(object sender, EventArgs e)
         {
             this.Close();
         }

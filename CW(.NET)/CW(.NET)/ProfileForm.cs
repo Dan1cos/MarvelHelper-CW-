@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CW_.NET_
 {
-    public partial class ProfileForm : Form
+    public partial class ProfileForm : MaterialForm
     {
         private MarvelContext context = new MarvelContext();
         public ProfileForm()
@@ -20,23 +21,6 @@ namespace CW_.NET_
             comboBox1.Items.Add("comics");
             comboBox1.Items.Add("series");
             comboBox1.SelectedIndex = 0;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            flowLayoutPanel1.Controls.Clear();
-            if (comboBox1.SelectedItem == "characters")
-            { 
-                Task.Run(() => AddToForm(context.Characters));
-            }
-            else if(comboBox1.SelectedItem == "comics")
-            {
-                Task.Run(() => AddToForm(context.Comics));
-            }
-            else
-            {
-                Task.Run(() => AddToForm(context.Movies));
-            }
         }
 
         private void AddToForm(IEnumerable<ItemPrototype> items)
@@ -94,9 +78,27 @@ namespace CW_.NET_
             form.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+        private void materialRaisedButton2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            if (comboBox1.SelectedItem.ToString() == "characters")
+            {
+                Task.Run(() => AddToForm(context.Characters));
+            }
+            else if (comboBox1.SelectedItem.ToString() == "comics")
+            {
+                Task.Run(() => AddToForm(context.Comics));
+            }
+            else
+            {
+                Task.Run(() => AddToForm(context.Movies));
+            }
         }
     }
 }
